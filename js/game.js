@@ -78,13 +78,18 @@ function init()
 		case "wood":	return wood_mat
 		case "velvet":	return velvet_mat
 	}}})
-	loader.load("assets/grid.obj", function(grid) {
-		box = new THREE.Box3().setFromObject(grid)
+	loader.load("assets/grid.obj", function(board) {
+		box = new THREE.Box3().setFromObject(board)
 		base = box.size()
-		grid.scale.x = 50000
-		grid.scale.y = 50000
-		grid.scale.z = 50000
+		board.scale.x = 50000
+		board.scale.y = 50000
+		board.scale.z = 50000
+		scene.add(board)
+
+		var grid = new THREE.GridHelper(167500, 6, 0x0, 0x0)
+		grid.position.y = 22500
 		scene.add(grid)
+		console.log(grid)
 	})
 	loadCar("car_yellow", function(car) {
 		objs.car = car
@@ -97,7 +102,7 @@ function init()
 function update()
 {
 	requestAnimationFrame(update)
-	scene.rotation.y -= 0.005
+	scene.rotation.y -= 0.0001
 	renderer.render(scene, camera)
 }
 
